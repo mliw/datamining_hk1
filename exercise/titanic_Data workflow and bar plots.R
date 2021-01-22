@@ -8,7 +8,8 @@ library(ggplot2)
 
 # Use the Import Dataset button, or change the path name
 # to the appropriate location on your computer and use this line
-titanic = read.csv('../data/titanic.csv')
+# setwd("G:/UT-Austin2020-2021研究生一年级/ECO395M_DATA MININGSTAT LEARNING/homeworks/datamining_hk1/exercise")
+titanic = read.csv('data/titanic.csv')
 
 # quick peak at the first 6 lines
 head(titanic)
@@ -16,7 +17,7 @@ head(titanic)
 # Our basic contingency table of proportions,
 # conditioning on the column variable (passenger).
 # This is great for exploration...
-xtabs(~survived + passengerClass, data=titanic) %>%
+xtabs(~survived + passengerClass, data=titanic) %>% # 管道函数，将前面函数的返回值作为下一个函数的第一个自变量
   prop.table(margin=2)
 
 # But xtabs isn't the best for making plots.
@@ -31,6 +32,8 @@ xtabs(~survived + passengerClass, data=titanic) %>%
 # Two notes:
 #   1) n() is a tidyverse function that counts cases
 #   2) We use the double-equals sign (==) to test for equality
+# ?group_by查看group_by函数的意思
+tem = group_by(titanic,sex)
 titanic %>%
   group_by(sex) %>%
   summarize(total_count = n(),
@@ -87,7 +90,7 @@ titanic %>%
 # Let's store our one-group summary in a data frame called d1
 d1 = titanic %>%
   group_by(sex) %>%
-  summarize(surv_pct = sum(survived=='yes')/n())
+  summarize(surv_pct = sum(survived=="yes")/n())
 d1
 
 # Now we can use d1 to make a barplot of survival percentage by sex.
@@ -109,6 +112,10 @@ d2 = titanic %>%
 ggplot(data = d2) + 
   geom_col(mapping = aes(x=adult, y=surv_pct, fill=sex),
            position ='dodge')
+ggplot(data = d2) + 
+  geom_col(mapping = aes(x=adult, y=surv_pct),
+           position ='dodge')
+
 # We can make two different comparisons from this plot:
 #   - survival vs sex, holding age constant
 #   - survival vs age, holding sex constant

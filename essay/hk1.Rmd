@@ -25,21 +25,31 @@ This document is the first homework of ECO395M STAT LEARNING. The projects \text
 
 \newpage
 \section{Gas Price}
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r, echo=FALSE}
+gasprice = read.csv("data/GasPrices.csv")
+library(ggplot2)
 ```
 
-## Including Plots
+\textbf{(A) Gas stations charge more if they lack direct competition in sight (boxplot).}
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r fig1, fig.width=4, fig.align = "center",echo=TRUE}
+p0 = ggplot(data=gasprice) + 
+  geom_boxplot(aes(x=Competitors, y=Price))
+p0
 ```
+\textbf{Claim}: Gas stations charge more if they lack direct competition in sight
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+\textbf{Conclusion}: The theory is supported by the data. As the left box is higher than the right box.
+
+\newpage
+\textbf{(B) The richer the area, the higher the gas price (scatter plot).}
+
+```{r fig2, fig.width=4, fig.align = "center",echo=TRUE}
+p0 = ggplot(data=gasprice) + 
+  geom_point(aes(x=Income, y=Price))
+p0
+```
+\textbf{Claim}: Gas stations charge more if they lack direct competition in sight
+
+\textbf{Conclusion}: The theory is supported by the data. As the left box is higher than the right box.
+

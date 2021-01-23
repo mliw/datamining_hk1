@@ -3,7 +3,7 @@ library(ggplot2)
 
 # Use the Import Dataset button, or change the path name
 # to the appropriate location on your computer
-us_counties = read.csv('../data/us_counties.csv')
+us_counties = read.csv('data/us_counties.csv')
 
 ###
 # visualizing distributions
@@ -17,6 +17,7 @@ ggplot(data=us_counties) +
   geom_histogram(aes(x=median_income2018))
 
 # With specified bin width (here $2000)
+# binwidth 是每一个柱子的宽度
 ggplot(data=us_counties) + 
   geom_histogram(aes(x=median_income2018), binwidth = 2000)
 

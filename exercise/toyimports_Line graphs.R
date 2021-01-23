@@ -1,7 +1,7 @@
 library(ggplot2)
 library(tidyverse)
 
-toyimports = read.csv('../data/toyimports.csv')
+toyimports = read.csv('data/toyimports.csv')
 
 head(toyimports)
 

@@ -5,7 +5,7 @@ library(ggplot2)
 # 1) understand the grammar of graphics using ggplot2
 # 2) make a scatterplot that encodes two (and then three) variables
 # 3) learn about faceting: stratifying a basic plot by a third variable
-
+# setwd("G:/UT-Austin2020-2021研究生一年级/ECO395M_DATA MININGSTAT LEARNING/homeworks/datamining_hk1/exercise")
 # load the mpg data set (comes with tidyverse)
 data(mpg)
 

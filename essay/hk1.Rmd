@@ -109,3 +109,50 @@ p0
 \textbf{Claim}: Gas stations with direct highway access charge more
 
 \textbf{Conclusion}: The theory is supported by the data. As in histogram, more density is put on the right tail of gas stations with direct highway access. The boxplot reaches the same conclusion.
+
+\section{a bike share network}
+```{r, echo=FALSE,message=FALSE,results='hide'}
+library(tidyverse)
+library(ggplot2)
+bikeshare=read.csv("data/bikeshare.csv")
+head(bikeshare, 10)
+```
+
+\textbf{(a) Plot A: a line graph showing average bike rentals (total) versus hour of the day (hr).}
+
+```{r fig7, fig.width=2.5, fig.height=2.5,fig.align = "center",echo=TRUE}
+avg_hr_rent=bikeshare %>%
+  group_by(hr) %>%
+  summarize(avg_hour_rental=mean(total))
+ggplot(data=avg_hr_rent) + 
+  geom_line(aes(x=hr, y=avg_hour_rental)) +
+  scale_x_continuous(breaks=0:23)
+```
+
+\textbf{(b) Plot B: a faceted line graph showing average bike rentals versus hour of the day, faceted according to whether it is a working day (workingday).}
+```{r fig8, fig.width=2.5, fig.height=2.5,fig.align = "center",echo=TRUE,message=FALSE,results='hide'}
+avg_hr_work_rent=bikeshare %>%
+  group_by(hr, workingday) %>%
+  summarize(avg_hour_working_rental=mean(total))
+ggplot(data=avg_hr_work_rent) + 
+  geom_line(aes(x=hr, y=avg_hour_working_rental)) +
+  scale_x_continuous(breaks=0:23) +
+  facet_wrap(~ workingday, nrow=2)
+```
+
+\newpage
+\textbf{(c) Plot C: a faceted bar plot showing average ridership during the 8 AM hour by weather situation code (weathersit), faceted according to whether it is a working day or not.}
+
+```{r fig9, fig.width=2.5, fig.height=2.5,fig.align = "center",echo=TRUE,message=FALSE,results='hide'}
+bikeshare_8am=bikeshare %>%
+  filter(hr==8)
+bike_8am_work_wather= bikeshare_8am %>%
+  group_by(workingday, weathersit) %>%
+  summarise(avg_8am_working_wather=mean(total))
+ggplot(data=bike_8am_work_wather) + 
+  geom_col(aes(x=weathersit, y=avg_8am_working_wather)) +
+  facet_wrap(~ workingday, nrow=2)
+``` 
+  
+  
+  
